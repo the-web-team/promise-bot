@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: promise-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
