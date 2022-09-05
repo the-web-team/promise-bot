@@ -1,0 +1,22 @@
+name: twt-bot
+
+services:
+  bot:
+    image: node:latest
+    working_dir: /var/app
+    command: ["yarn", "docker-dev"]
+    environment:
+      # Startup Config
+      NODE_ENV: "development"
+      # Server Config
+      DISCORD_CLIENT_ID: "${DISCORD_CLIENT_ID}"
+      DISCORD_CLIENT_SECRET: "${DISCORD_CLIENT_SECRET}"
+      DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
+    volumes:
+      - ./src:/var/app/src
+      - ./guild_configs.yml:/var/app/guild_configs.yml
+      - ./tsconfig.json:/var/app/tsconfig.json
+      - ./package.json:/var/app/package.json
+
+volumes:
+  bot-node-modules: {}
