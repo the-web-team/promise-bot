@@ -26,6 +26,7 @@
   "scripts": {
     "dev": "nodemon --watch . -e ts,js,json,yml --exec 'node -r @swc-node/register src/server.ts'",
     "docker-dev": "yarn && yarn dev",
-    "test": "jest"
+    "test": "jest",
+    "start": "node -r @swc-node/register src/server.ts"
   }
 }
