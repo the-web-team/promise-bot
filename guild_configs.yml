@@ -9,6 +9,11 @@
         {member} optionally you may add an {channel:589662168430149642} if you'd like.
         Some others have made their own as welland you can copy their format if you'd like.
         You're able to update it whenever!
+
+        First, accept the rules.
+
+        Then, before we can grant you a role you must let us know your first name.
+        We go by our first names here for the purpose of networking and such!
       withSetNameButton: true
     setName:
       role: "583006205253779456"
