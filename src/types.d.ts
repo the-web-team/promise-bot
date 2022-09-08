@@ -16,6 +16,9 @@ declare global {
 			setName?: {
 				role: string
 			}
+			promoteActiveChannels?: {
+				enabledCategories: string[]
+			}
 		}
 	}
 

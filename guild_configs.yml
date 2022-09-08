@@ -1,7 +1,7 @@
 "563929079620042773":
   plugins:
     welcomeMessage:
-      channel: "563929079620042775"
+      channel: "563929079620042775" # welcome
       message: |-
         Welcome {member}!
         @everyone feel free to introduce yourselves to each other.
@@ -16,4 +16,8 @@
         We go by our first names here for the purpose of networking and such!
       withSetNameButton: true
     setName:
-      role: "583006205253779456"
+      role: "583006205253779456" # Member
+    promoteActiveChannels:
+      enabledCategories:
+        - "563929079620042774" # Text Topics
+        - "597918822296584203" # Dev Topics

@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js'
 import { registerInteractions } from './interactions'
 import welcomeMessage from './plugins/welcomeMessage'
+import promoteActiveChannels from './plugins/promoteActiveChannels'
 import config from './config'
 
 registerInteractions().then(async ({ commands, buttons, modals }) => {
@@ -19,6 +20,10 @@ registerInteractions().then(async ({ commands, buttons, modals }) => {
 
 	client.on('guildMemberAdd', async (member) => {
 		await welcomeMessage(member)
+	})
+
+	client.on('messageCreate', async (message) => {
+		await promoteActiveChannels(message)
 	})
 
 	client.on('interactionCreate', async (interaction) => {

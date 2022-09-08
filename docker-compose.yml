@@ -17,6 +17,8 @@ services:
       - ./guild_configs.yml:/var/app/guild_configs.yml
       - ./tsconfig.json:/var/app/tsconfig.json
       - ./package.json:/var/app/package.json
+  postgres:
+
 
 volumes:
   bot-node-modules: {}
