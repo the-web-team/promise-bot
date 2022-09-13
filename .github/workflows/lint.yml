@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  run-lint:
+    name: Run Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git Repo
+        uses: actions/checkout@v2
+      - name: Lint Action
+        uses: wearerequired/lint-action@v2.1.0
+        with:
+          eslint: true
+
