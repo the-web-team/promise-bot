@@ -1,4 +1,4 @@
-import {
+import type {
 	ButtonInteraction,
 	ChatInputCommandInteraction,
 	ModalSubmitInteraction,
@@ -18,6 +18,11 @@ declare global {
 			}
 			promoteActiveChannels?: {
 				enabledCategories: string[]
+			}
+			kudos?: {
+				maxKudo: number
+				maxKudont: number
+				cooldownSeconds: number
 			}
 		}
 	}

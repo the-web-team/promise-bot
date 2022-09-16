@@ -8,11 +8,11 @@ export const registerInteractions = async () => {
 	const [commands, buttons, modals] = await Promise.all([
 		getInteractions<SlashCommand>('commands'),
 		getInteractions<ButtonCommand>('buttons'),
-		getInteractions<ModalCommand>('modals')
+		getInteractions<ModalCommand>('modals'),
 	])
 
 	if (commands.length > 0) {
-		const rest = new REST({version: '10'}).setToken(config.discord.token)
+		const rest = new REST({ version: '10' }).setToken(config.discord.token)
 
 		try {
 			console.log(`Started refreshing ${commands.length} application (/) commands.`)
@@ -23,8 +23,7 @@ export const registerInteractions = async () => {
 				}),
 			})
 
-			// @ts-ignore
-			console.log(`Successfully reloaded ${data.length} application (/) commands.`)
+			console.log(`Successfully reloaded ${(data as unknown[]).length} application (/) commands.`)
 		} catch (err) {
 			console.error(err)
 		}

@@ -13,6 +13,12 @@
   "plugins": [
     "@typescript-eslint"
   ],
+  "globals": {
+    "GuildConfig": true,
+    "SlashCommand": true,
+    "ModalCommand": true,
+    "ButtonCommand": true
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": ["./tsconfig.json"]
@@ -30,6 +36,8 @@
     "semi": ["error", "never", {
       "beforeStatementContinuationChars": "never"
     }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "object-curly-newline": "error",
     "object-curly-spacing": ["error", "always"],
     "array-bracket-spacing": ["error", "never"],
@@ -70,7 +78,7 @@
     "no-return-assign": "error",
     "no-return-await": "error",
     "arrow-body-style": ["error", "always"],
-    "@typescript-eslint/array-type": ["error", "always"],
+    "@typescript-eslint/array-type": ["error"],
     "@typescript-eslint/prefer-includes": "error",
     "require-await": "off",
     "quotes": "off",
@@ -102,6 +110,7 @@
         { "pattern": "@**", "group": "external", "position": "before" }
       ],
       "newlines-between": "never"
-    }]
+    }],
+    "security/detect-object-injection": "off"
   }
 }

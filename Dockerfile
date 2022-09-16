@@ -10,4 +10,4 @@ COPY guild_configs.yml /var/app/guild_configs.yml
 COPY .swcrc /var/app/.swcrc
 COPY src /var/app/src
 
-CMD yarn start
+CMD yarn migrate:prod && yarn start

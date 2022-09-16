@@ -18,7 +18,7 @@ export const guildConfigs = async (): Promise<Record<string, GuildConfig>> => {
 
 export const getGuildConfig = async (guildId: string) => {
 	const configs = await guildConfigs()
-	return configs[guildId]
+	return configs[`${guildId}`]
 }
 
 export default config

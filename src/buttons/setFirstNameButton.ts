@@ -1,5 +1,6 @@
+import type { GuildMember } from 'discord.js'
 import {
-	ActionRowBuilder, GuildMember,
+	ActionRowBuilder,
 	ModalBuilder,
 	TextInputBuilder,
 	TextInputStyle,
@@ -60,5 +61,5 @@ export default {
 		modal.addComponents(firstActionRow)
 
 		await interaction.showModal(modal)
-	}
+	},
 } as ButtonCommand

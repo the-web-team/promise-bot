@@ -2,23 +2,45 @@ name: twt-bot
 
 services:
   bot:
-    image: node:latest
-    working_dir: /var/app
+    image: &app_image node:latest
+    working_dir: &app_working_dir /var/app
     command: ["yarn", "docker-dev"]
-    environment:
+    environment: &app_environment
       # Startup Config
       NODE_ENV: "development"
       # Server Config
       DISCORD_CLIENT_ID: "${DISCORD_CLIENT_ID}"
       DISCORD_CLIENT_SECRET: "${DISCORD_CLIENT_SECRET}"
       DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
-    volumes:
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-admin}@postgres:5432/${POSTGRES_DATABASE:-myapp}?schema=public"
+    volumes: &app_volumes
+      - ./prisma:/var/app/prisma
       - ./src:/var/app/src
       - ./guild_configs.yml:/var/app/guild_configs.yml
       - ./tsconfig.json:/var/app/tsconfig.json
       - ./package.json:/var/app/package.json
+    depends_on: &app_depends_on
+      - postgres
+  studio:
+    image: *app_image
+    working_dir: *app_working_dir
+    command: ["yarn", "studio"]
+    environment: *app_environment
+    volumes: *app_volumes
+    depends_on: *app_depends_on
+    ports:
+      - "${PRISMA_STUDIO_PORT:-5555}:5555"
   postgres:
-
+    image: postgres:latest
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-admin}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-admin}"
+      POSTGRES_DB: "${POSTGRES_DATABASE:-myapp}"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
 
 volumes:
   bot-node-modules: {}
+  postgres-data: {}

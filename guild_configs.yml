@@ -21,3 +21,7 @@
       enabledCategories:
         - "563929079620042774" # Text Topics
         - "597918822296584203" # Dev Topics
+    kudos:
+      maxKudo: 1
+      maxKudont: 1
+      cooldownSeconds: 30

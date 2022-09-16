@@ -3,6 +3,7 @@ import { registerInteractions } from './interactions'
 import welcomeMessage from './plugins/welcomeMessage'
 import promoteActiveChannels from './plugins/promoteActiveChannels'
 import config from './config'
+import kudosPlugin from './plugins/kudos'
 
 registerInteractions().then(async ({ commands, buttons, modals }) => {
 	const client = new Client({
@@ -23,7 +24,13 @@ registerInteractions().then(async ({ commands, buttons, modals }) => {
 	})
 
 	client.on('messageCreate', async (message) => {
-		await promoteActiveChannels(message)
+		if (message.author.id !== client.user?.id) {
+			await Promise.allSettled([
+				// Add messageCreatePlugins here
+				promoteActiveChannels(message),
+				kudosPlugin(message),
+			])
+		}
 	})
 
 	client.on('interactionCreate', async (interaction) => {
