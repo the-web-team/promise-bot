@@ -41,7 +41,7 @@
     "studio": "npx prisma studio --browser none",
     "generate": "npx prisma generate",
     "migrate": "yarn docker:migrate && yarn generate",
-    "migrate:prod": "npx prisma migrate deploy --yes",
+    "migrate:prod": "npx --yes prisma migrate deploy",
     "docker:dev": "yarn && NODE_OPTIONS='--inspect 0.0.0.0' yarn dev",
     "docker:migrate": "docker compose exec bot npx prisma migrate dev"
   }
