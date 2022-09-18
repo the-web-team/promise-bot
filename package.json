@@ -43,7 +43,6 @@
     "migrate": "yarn docker:migrate && yarn generate",
     "migrate:prod": "yarn prisma migrate deploy",
     "docker:dev": "yarn && NODE_OPTIONS='--inspect 0.0.0.0' yarn dev",
-    "docker:migrate": "docker compose exec bot npx prisma migrate dev",
-    "postinstall": "yarn prisma generate"
+    "docker:migrate": "docker compose exec bot npx prisma migrate dev"
   }
 }
