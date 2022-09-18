@@ -3,7 +3,7 @@ FROM node:latest
 WORKDIR /var/app
 
 COPY package.json /var/app/package.json
-RUN yarn
+RUN yarn && yarn generate
 
 COPY tsconfig.json /var/app/tsconfig.json
 COPY guild_configs.yml /var/app/guild_configs.yml
