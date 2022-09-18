@@ -37,12 +37,13 @@
     "test": "jest",
     "start": "node -r @swc-node/register src/server.ts",
     "lint": "eslint",
-    "prisma": "npx prisma",
-    "studio": "npx prisma studio --browser none",
-    "generate": "npx prisma generate",
+    "prisma": "npx --yes prisma",
+    "studio": "yarn prisma studio --browser none",
+    "generate": "yarn prisma generate",
     "migrate": "yarn docker:migrate && yarn generate",
-    "migrate:prod": "npx --yes prisma migrate deploy",
+    "migrate:prod": "yarn prisma migrate deploy",
     "docker:dev": "yarn && NODE_OPTIONS='--inspect 0.0.0.0' yarn dev",
-    "docker:migrate": "docker compose exec bot npx prisma migrate dev"
+    "docker:migrate": "docker compose exec bot npx prisma migrate dev",
+    "postinstall": "yarn prisma generate"
   }
 }
