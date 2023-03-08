@@ -1,16 +1,21 @@
-FROM node:16
+FROM node:16 as dev
+
+RUN npm install -g pnpm
+
+
+FROM dev
 
 WORKDIR /var/app
 
 COPY package.json /var/app/package.json
-RUN yarn
+COPY pnpm-lock.yaml /var/app/pnpm-lock.yaml
+RUN pnpm i
 
 COPY prisma /var/app/prisma
-RUN yarn generate
+RUN pnpm generate
 
 COPY tsconfig.json /var/app/tsconfig.json
 COPY guild_configs.yml /var/app/guild_configs.yml
-COPY .swcrc /var/app/.swcrc
 COPY src /var/app/src
 
-CMD yarn migrate:prod && yarn start
+CMD pnpm migrate:prod && pnpm start

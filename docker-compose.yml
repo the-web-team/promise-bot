@@ -2,7 +2,9 @@ name: twt-bot
 
 services:
   bot:
-    image: &app_image node:latest
+    build: &app_build
+      dockerfile: ./Dockerfile
+      target: dev
     working_dir: &app_working_dir /var/app
     command: ["yarn", "docker-dev"]
     environment: &app_environment
@@ -19,10 +21,11 @@ services:
       - ./guild_configs.yml:/var/app/guild_configs.yml
       - ./tsconfig.json:/var/app/tsconfig.json
       - ./package.json:/var/app/package.json
+      - ./pnpm-lock.yaml:/var/app/pnpm-lock.yaml
     depends_on: &app_depends_on
       - postgres
   studio:
-    image: *app_image
+    build: *app_build
     working_dir: *app_working_dir
     command: ["yarn", "studio"]
     environment: *app_environment
