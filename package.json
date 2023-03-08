@@ -33,16 +33,16 @@
   },
   "scripts": {
     "dev": "nodemon --watch . -e ts,js,json,yml --exec 'node -r @swc-node/register src/server.ts'",
-    "docker-dev": "yarn && yarn dev",
+    "docker-dev": "pnpm i && pnpm dev",
     "test": "jest",
     "start": "node -r @swc-node/register src/server.ts",
     "lint": "eslint",
     "prisma": "npx --yes prisma",
-    "studio": "yarn prisma studio --browser none",
-    "generate": "yarn prisma generate",
-    "migrate": "yarn docker:migrate && yarn generate",
-    "migrate:prod": "yarn prisma migrate deploy",
-    "docker:dev": "yarn && NODE_OPTIONS='--inspect 0.0.0.0' yarn dev",
+    "studio": "pnpm prisma studio --browser none",
+    "generate": "pnpm prisma generate",
+    "migrate": "pnpm docker:migrate && yarn generate",
+    "migrate:prod": "pnpm prisma migrate deploy",
+    "docker:dev": "pnpm && NODE_OPTIONS='--inspect 0.0.0.0' pnpm dev",
     "docker:migrate": "docker compose exec bot npx prisma migrate dev"
   }
 }
