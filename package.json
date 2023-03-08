@@ -40,7 +40,7 @@
     "prisma": "npx --yes prisma",
     "studio": "pnpm prisma studio --browser none",
     "generate": "pnpm prisma generate",
-    "migrate": "pnpm docker:migrate && yarn generate",
+    "migrate": "pnpm docker:migrate && pnpm generate",
     "migrate:prod": "pnpm prisma migrate deploy",
     "docker:dev": "pnpm && NODE_OPTIONS='--inspect 0.0.0.0' pnpm dev",
     "docker:migrate": "docker compose exec bot npx prisma migrate dev"

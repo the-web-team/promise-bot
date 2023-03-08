@@ -6,7 +6,7 @@ services:
       dockerfile: ./Dockerfile
       target: dev
     working_dir: &app_working_dir /var/app
-    command: ["yarn", "docker-dev"]
+    command: ["pnpm", "docker-dev"]
     environment: &app_environment
       # Startup Config
       NODE_ENV: "development"
@@ -27,7 +27,7 @@ services:
   studio:
     build: *app_build
     working_dir: *app_working_dir
-    command: ["yarn", "studio"]
+    command: ["pnpmpnpm", "studio"]
     environment: *app_environment
     volumes: *app_volumes
     depends_on: *app_depends_on
