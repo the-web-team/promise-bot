@@ -1,4 +1,3 @@
-import type { AsyncFunction } from 'type-fest/source/async-return-type'
 import { userMention, type Message, type TextChannel } from 'discord.js'
 import { getGuildConfig } from '../config'
 import prisma from '../prisma'
@@ -77,9 +76,9 @@ const kudosPlugin = async (message: Message) => {
 					}, new Map<string, string[]>())
 
 					// Aggregate members of the roles receiving kudos and kudonts
-					const asyncFunctions: AsyncFunction[] = []
+					const asyncFunctions: (() => Promise<void> | void)[] = []
 					oneKudoRoles.forEach((kudoRole) => {
-						asyncFunctions.push(async () => {
+						asyncFunctions.push(() => {
 							const roleMemberIds = rolesToMemberIds.get(kudoRole) as string[]
 							for (const roleMemberId of roleMemberIds) {
 								oneKudoUsers.add(roleMemberId)
@@ -87,7 +86,7 @@ const kudosPlugin = async (message: Message) => {
 						})
 					})
 					oneKudontRoles.forEach((kudontRole) => {
-						asyncFunctions.push(async () => {
+						asyncFunctions.push(() => {
 							const roleMemberIds = rolesToMemberIds.get(kudontRole) as string[]
 							for (const roleMemberId of roleMemberIds) {
 								oneKudontUsers.add(roleMemberId)
