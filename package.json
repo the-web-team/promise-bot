@@ -37,12 +37,12 @@
     "test": "jest",
     "start": "node -r @swc-node/register src/server.ts",
     "lint": "eslint",
-    "prisma": "npx --yes prisma",
+    "prisma": "pnpx prisma",
     "studio": "pnpm prisma studio --browser none",
     "generate": "pnpm prisma generate",
     "migrate": "pnpm docker:migrate && pnpm generate",
     "migrate:prod": "pnpm prisma migrate deploy",
     "docker:dev": "pnpm && NODE_OPTIONS='--inspect 0.0.0.0' pnpm dev",
-    "docker:migrate": "docker compose exec bot npx prisma migrate dev"
+    "docker:migrate": "docker compose exec bot pnpx prisma migrate dev"
   }
 }
