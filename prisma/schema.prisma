@@ -17,4 +17,6 @@ model Kudo {
   kudos BigInt
   kudonts BigInt
   givenAt DateTime @default(now())
+
+  @@index([guildId, userId])
 }

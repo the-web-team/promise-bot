@@ -6,7 +6,7 @@ services:
       dockerfile: ./Dockerfile
       target: dev
     working_dir: &app_working_dir /var/app
-    command: "bash -c 'pnpm i --frozen-lockfile && pnpx vite-node src/server.ts'"
+    command: ["pnpm", "docker:dev"]
     environment: &app_environment
       # Startup Config
       NODE_ENV: "development"
