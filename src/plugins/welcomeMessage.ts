@@ -5,7 +5,7 @@ import {
 	ButtonBuilder,
 	ButtonStyle,
 } from 'discord.js'
-import { parseWelcomeMessage } from '../utils'
+import { parseMessageVars } from '../utils'
 import { getGuildConfig } from '../config'
 
 const welcomeMessage = async (member: GuildMember) => {
@@ -23,7 +23,7 @@ const welcomeMessage = async (member: GuildMember) => {
 			return
 		}
 
-		const welcomeMessage = parseWelcomeMessage(member.id, config.plugins.welcomeMessage.message)
+		const welcomeMessage = parseMessageVars(member.id, config.plugins.welcomeMessage.message)
 
 		if (config.plugins.welcomeMessage.withSetNameButton) {
 			const firstNameButton = new ButtonBuilder()
