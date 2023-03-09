@@ -6,28 +6,30 @@ services:
       dockerfile: ./Dockerfile
       target: dev
     working_dir: &app_working_dir /var/app
-    command: ["pnpm", "docker-dev"]
+    command: "bash -c 'pnpm i --frozen-lockfile && pnpx vite-node src/server.ts'"
     environment: &app_environment
       # Startup Config
       NODE_ENV: "development"
+      NODE_OPTIONS: "--inspect 0.0.0.0"
       # Server Config
       DISCORD_CLIENT_ID: "${DISCORD_CLIENT_ID}"
       DISCORD_CLIENT_SECRET: "${DISCORD_CLIENT_SECRET}"
       DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
       DATABASE_URL: "postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-admin}@postgres:5432/${POSTGRES_DATABASE:-myapp}?schema=public"
     volumes: &app_volumes
-      - ./prisma:/var/app/prisma
-      - ./src:/var/app/src
-      - ./guild_configs.yml:/var/app/guild_configs.yml
-      - ./tsconfig.json:/var/app/tsconfig.json
-      - ./package.json:/var/app/package.json
-      - ./pnpm-lock.yaml:/var/app/pnpm-lock.yaml
+      - ./prisma:/var/app/prisma:cached
+      - ./src:/var/app/src:cached
+      - ./pnpm-lock.yaml:/var/app/pnpm-lock.yaml:cached
+      - ./package.json:/var/app/package.json:cached
+      - ./tsconfig.json:/var/app/tsconfig.json:cached
+      - ./guild_configs.yml:/var/app/guild_configs.yml:cached
+      - bot-node-modules:/var/app/node_modules
     depends_on: &app_depends_on
       - postgres
   studio:
     build: *app_build
     working_dir: *app_working_dir
-    command: ["pnpmpnpm", "studio"]
+    command: ["pnpm", "studio"]
     environment: *app_environment
     volumes: *app_volumes
     depends_on: *app_depends_on
