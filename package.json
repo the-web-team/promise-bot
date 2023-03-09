@@ -42,7 +42,8 @@
     "generate": "pnpm prisma generate",
     "migrate": "pnpm docker:migrate && pnpm generate",
     "migrate:prod": "pnpm prisma migrate deploy",
-    "docker:dev": "pnpm fetch && pnpm i -r --offline && pnpm dev",
+    "docker:install": "pnpm install --frozen-lockfile",
+    "docker:dev": "pnpm docker:install && pnpm dev",
     "docker:migrate": "docker compose exec bot pnpx prisma migrate dev"
   }
 }
