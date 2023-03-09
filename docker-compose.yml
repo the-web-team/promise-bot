@@ -10,7 +10,6 @@ services:
     environment: &app_environment
       # Startup Config
       NODE_ENV: "development"
-      NODE_OPTIONS: "--inspect 0.0.0.0"
       # Server Config
       DISCORD_CLIENT_ID: "${DISCORD_CLIENT_ID}"
       DISCORD_CLIENT_SECRET: "${DISCORD_CLIENT_SECRET}"
@@ -24,6 +23,7 @@ services:
       - ./tsconfig.json:/var/app/tsconfig.json:cached
       - ./guild_configs.yml:/var/app/guild_configs.yml:cached
       - bot-node-modules:/var/app/node_modules
+      - bot-pnpm-store:/opt/app/.pnpm-store
     depends_on: &app_depends_on
       - postgres
   studio:
@@ -48,4 +48,5 @@ services:
 
 volumes:
   bot-node-modules: {}
+  bot-pnpm-store: {}
   postgres-data: {}
