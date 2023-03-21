@@ -23,7 +23,9 @@ const welcomeMessage = async (member: GuildMember) => {
 			return
 		}
 
-		const welcomeMessage = parseMessageVars(member.id, config.plugins.welcomeMessage.message)
+		const welcomeMessage = parseMessageVars(config.plugins.welcomeMessage.message, {
+			memberId: member.id,
+		})
 
 		if (config.plugins.welcomeMessage.withSetNameButton) {
 			const firstNameButton = new ButtonBuilder()
