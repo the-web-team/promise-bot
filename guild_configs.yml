@@ -14,8 +14,6 @@
 
         Then, before we can grant you a role you must let us know your first name.
         We go by our first names here for the purpose of networking and such!
-        
-        We have NO association to Ambrosial.
       withSetNameButton: true
     setName:
       role: "583006205253779456" # Member
