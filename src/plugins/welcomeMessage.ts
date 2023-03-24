@@ -94,8 +94,8 @@ const welcomeMessagePlugin = createPlugin({
 			}
 
 			await Promise.all([
-				guildMember.setNickname(`.${sanitizedUsername}`),
-				guildMember.roles.add(guildConfig.plugins.setName.role),
+				guildMember.setNickname(`.${sanitizedUsername}`, 'Updating to first name.'),
+				guildMember.roles.add(guildConfig.plugins.setName.role, 'Completing registration and enabling viewing of channels.'),
 			])
 
 			await interaction.reply(`Your name has been set to ${inlineCode(`.${sanitizedUsername}`)}!`)
