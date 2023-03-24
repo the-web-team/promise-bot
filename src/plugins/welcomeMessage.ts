@@ -70,13 +70,15 @@ const welcomeMessagePlugin = createPlugin({
 				return
 			}
 
+			const pluginOptions = guildConfig.plugins.setName
+
 			const firstName = interaction.fields.getTextInputValue('firstName')
 			const sanitizedUsername = firstName
 				.replace(/[^a-zA-Z]/g, '')
 				.toLowerCase()
 			const guildMember = interaction.member as GuildMember
 
-			const role = guildConfig.plugins.setName.role
+			const role = pluginOptions.role
 			if (!role) {
 				await interaction.reply({
 					content: 'Invalid Role, please notify an admin!',
@@ -95,7 +97,7 @@ const welcomeMessagePlugin = createPlugin({
 
 			await Promise.all([
 				guildMember.setNickname(`.${sanitizedUsername}`, 'Updating to first name.'),
-				guildMember.roles.add(guildConfig.plugins.setName.role, 'Completing registration and enabling viewing of channels.'),
+				guildMember.roles.add(pluginOptions.role, 'Completing registration and enabling viewing of channels.'),
 			])
 
 			await interaction.reply(`Your name has been set to ${inlineCode(`.${sanitizedUsername}`)}!`)
@@ -121,8 +123,10 @@ const welcomeMessagePlugin = createPlugin({
 				return
 			}
 
+			const pluginOptions = guildConfig.plugins.setName
+
 			const guildMember = interaction.member as GuildMember
-			const role = guildConfig.plugins.setName.role
+			const role = pluginOptions.role
 			if (!role) {
 				await interaction.reply({
 					content: 'Invalid Role, please notify an admin!',
