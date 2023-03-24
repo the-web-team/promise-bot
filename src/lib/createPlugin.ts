@@ -17,6 +17,10 @@ const createPlugin = (plugin: Plugin) => {
 				client.on('ready', plugin.onReady)
 			}
 
+			if (plugin.onGuildMemberAdd) {
+				client.on('guildMemberAdd', plugin.onGuildMemberAdd)
+			}
+
 			if (plugin.onMessage) {
 				client.on('messageCreate', plugin.onMessage)
 			}
