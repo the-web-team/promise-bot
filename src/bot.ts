@@ -1,6 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import type { GatewayIntentBits , SlashCommandBuilder } from 'discord.js'
+import type {
+	GatewayIntentBits,
+	SlashCommandBuilder,
+} from 'discord.js'
 import type createPlugin from './lib/createPlugin'
 import { Client, Routes } from 'discord.js'
 import { REST } from '@discordjs/rest'
