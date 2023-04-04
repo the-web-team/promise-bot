@@ -1,4 +1,5 @@
-import { Configuration, OpenAIApi } from 'openai'
+import type { ChatCompletionRequestMessage } from 'openai'
+import { ChatCompletionRequestMessageRoleEnum, Configuration, OpenAIApi } from 'openai'
 import config from '../config'
 
 const configuration = new Configuration({
@@ -8,13 +9,24 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 export const rephrase = async (phrase: string) => {
+	return trainedChatCompletion([
+		'You are a gangster from Los Angeles.',
+		'You will rephrase all messages sent as if you were a gangster from Los Angeles and spit out the rephrase plainly.',
+	], phrase)
+}
+
+export const trainedChatCompletion = async (training: string[], message: string) => {
 	const completion = await openai.createChatCompletion({
 		model: 'gpt-3.5-turbo',
-		messages: [
-			{ role: 'system', content: 'You are a gangster from Los Angeles.' },
-			{ role: 'system', content: 'You will rephrase all messages sent as if you were a gangster from Los Angeles and spit out the rephrase plainly.' },
-			{ role: 'user', content: phrase },
-		],
+		messages: training.map<ChatCompletionRequestMessage>((train) => {
+			return {
+				role: ChatCompletionRequestMessageRoleEnum.System,
+				content: train,
+			}
+		}).concat({
+			role: ChatCompletionRequestMessageRoleEnum.User,
+			content: message,
+		}),
 	})
 
 	return completion.data.choices[0].message?.content || ''
