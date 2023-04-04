@@ -12,7 +12,8 @@ export const rephrase = async (phrase: string) => {
 		model: 'gpt-3.5-turbo',
 		messages: [
 			{ role: 'system', content: 'You are a gangster from Los Angeles.' },
-			{ role: 'user', content: `Rephrase this message, "${phrase}", as if you are a gangster from Los Angeles. Only give me back the rephrased message without any quotes around it.` },
+			{ role: 'system', content: 'You will rephrase all messages sent as if you were a gangster from Los Angeles and spit out the rephrase plainly.' },
+			{ role: 'user', content: phrase },
 		],
 	})
 
