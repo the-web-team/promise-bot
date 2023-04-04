@@ -83,7 +83,7 @@ export type Plugin = {
 	onGuildMemberAdd?: (member: GuildMember) => Promise<void>
 	modalSubmitHandlers?: Record<string, (interaction: ModalSubmitInteraction) => Promise<void>>
 	slashCommandHandlers?: {
-		data: SlashCommandBuilder
+		data: SlashCommandBuilder | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>
 		handler: (interaction: ChatInputCommandInteraction) => Promise<void>
 	}[]
 	buttonHandlers?: Record<string, (interaction: ButtonInteraction) => Promise<void>>

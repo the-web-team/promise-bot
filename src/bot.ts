@@ -47,7 +47,7 @@ const attachPlugins = (client: Client, plugins: PluginConfig[]) => {
 }
 
 const registerSlashCommands = async (plugins: PluginConfig[]) => {
-	const slashCommands: SlashCommandBuilder[] = []
+	const slashCommands: SlashCommandBuilder | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>[] = []
 
 	plugins.forEach((plugin) => {
 		const commands = plugin.config.slashCommandHandlers
