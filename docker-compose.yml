@@ -16,7 +16,7 @@ services:
       DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
       DATABASE_URL: "postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-admin}@postgres:5432/${POSTGRES_DATABASE:-myapp}?schema=public"
       OPENAI_SECRET: "${OPENAI_SECRET}"
-      VERSION_SHA: "${VERSION_SHA}"
+      RENDER_GIT_COMMIT: "${VERSION_SHA}"
     volumes: &app_volumes
       - ./prisma:/var/app/prisma:cached
       - ./src:/var/app/src:cached
