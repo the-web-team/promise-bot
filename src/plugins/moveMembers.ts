@@ -24,6 +24,11 @@ const moveMembersPlugin = createPlugin({
 						.setRequired(true)
 				}),
 			handler: async (interaction) => {
+				await interaction.reply({
+					content: await rephrase('Moving members as requested.'),
+					ephemeral: true,
+				})
+
 				const from = await interaction.options.getChannel('from', true, [ChannelType.GuildVoice]).fetch(true)
 				const to = await interaction.options.getChannel('to', true, [ChannelType.GuildVoice]).fetch(true)
 
@@ -39,36 +44,41 @@ const moveMembersPlugin = createPlugin({
 						content: `${bold('Error:')} ${rephrased}`,
 						ephemeral: true,
 					})
+				} else {
+
+					const membersList = membersArray.reduce((list, [id], index) => {
+						if (list.length === 0 && numMembers === 1 || index === 0) {
+							return id
+						} else if (list.length === index + 1) {
+							return `${list} and ${id}`
+						}
+
+						return `${list}, ${id}`
+					}, '')
+
+					await Promise.all(from.members.map(async (member) => {
+						return member.voice.setChannel(to.id, `Moved by ${interaction.member?.user.username}#${interaction.member?.user.discriminator}.`)
+					}))
+
+					const toChannelMention = channelMention(to.id)
+					const verb = numMembers > 1 ? 'have' : 'has'
+					const rawReply = `${membersList} ${verb} been moved to the ${to.id} channel.`
+					const rephrasedReply = await rephrase(rawReply)
+					const rephrasedReplyFixedChannel = rephrasedReply
+						.replace(to.id, toChannelMention)
+					const reply = membersArray
+						.reduce((reply, [id]) => {
+							const mention = userMention(id)
+							return reply.replace(id, mention)
+						}, rephrasedReplyFixedChannel)
+
+					console.log('reply', reply)
+
+					await interaction.followUp({
+						content: reply,
+						ephemeral: true,
+					})
 				}
-
-				const membersList = membersArray.reduce((list, [id], index) => {
-					if (list.length === 0 && numMembers === 1 || index === 0) {
-						return id
-					} else if (list.length === index + 1) {
-						return `${list} and ${id}`
-					}
-
-					return `${list}, ${id}`
-				}, '')
-
-				await Promise.all(from.members.map(async (member) => {
-					return member.voice.setChannel(to.id, `Moved by ${interaction.member?.user.username}#${interaction.member?.user.discriminator}.`)
-				}))
-
-				const toChannelMention = channelMention(to.id)
-				const verb = numMembers > 1 ? 'have' : 'has'
-				const rawReply = `${membersList} ${verb} been moved to the ${to.id} channel.`
-				const rephrasedReply = await rephrase(rawReply)
-				const rephrasedReplyFixedChannel = rephrasedReply?.replace(to.id, toChannelMention)
-				const reply = membersArray.reduce((reply, [id]) => {
-					const mention = userMention(id)
-					return reply?.replace(id, mention)
-				}, rephrasedReplyFixedChannel)
-
-				await interaction.reply({
-					content: reply,
-					ephemeral: true,
-				})
 			},
 		},
 	],
