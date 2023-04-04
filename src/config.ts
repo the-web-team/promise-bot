@@ -11,6 +11,7 @@ const config = {
 	openai: {
 		secret: process.env.OPENAI_SECRET as string,
 	},
+	version: process.env.VERSION_SHA as string,
 }
 
 const ymlPath = path.join(__dirname, '..', 'guild_configs.yml')
