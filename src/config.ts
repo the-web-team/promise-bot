@@ -15,13 +15,10 @@ const config = {
 }
 
 const ymlPath = path.join(__dirname, '..', 'guild_configs.yml')
-export const guildConfigs = async (): Promise<Record<string, GuildConfig>> => {
-	const guildConfigYaml = await fs.readFile(ymlPath, { encoding: 'utf-8' })
-	return parse(guildConfigYaml)
-}
 
 export const getGuildConfig = async (guildId: string) => {
-	const configs = await guildConfigs()
+	const guildConfigYaml = await fs.readFile(ymlPath, { encoding: 'utf-8' })
+	const configs = parse(guildConfigYaml)
 	return configs[`${guildId}`]
 }
 
