@@ -35,9 +35,7 @@ const moveMembersPlugin = createPlugin({
 				if (numMembers === 0) {
 					await interaction.reply({
 						content: `${bold('Error:')} ${rephrased} ${channelMention(from.id)} channel...`,
-						options: {
-							ephemeral: true,
-						},
+						ephemeral: true,
 					})
 				}
 
@@ -61,9 +59,7 @@ const moveMembersPlugin = createPlugin({
 
 				await interaction.reply({
 					content: `${memberList} ${numMembers > 1 ? 'has' : 'have'} been moved to the ${toChannelMention} channel.`,
-					options: {
-						ephemeral: true,
-					},
+					ephemeral: true,
 				})
 			},
 		},
