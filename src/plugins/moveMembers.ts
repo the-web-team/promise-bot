@@ -24,6 +24,8 @@ const moveMembersPlugin = createPlugin({
 						.setRequired(true)
 				}),
 			handler: async (interaction) => {
+				const memberId = interaction.member?.user.id
+
 				await interaction.reply({
 					content: await rephrase('Moving members as requested.'),
 					ephemeral: true,
@@ -33,6 +35,12 @@ const moveMembersPlugin = createPlugin({
 				const to = await interaction.options.getChannel('to', true, [ChannelType.GuildVoice]).fetch(true)
 
 				const membersArray = Array.from(from.members)
+				membersArray.sort((a, b) => {
+					const aOrder = a[0] === memberId ? 0 : 1
+					const bOrder = b[0] === memberId ? 0 : 1
+
+					return bOrder - aOrder
+				})
 				const numMembers = membersArray.length
 
 				const rawRephrased = await rephrase(`There are no members in the ${from.id} channel to move...`)
@@ -68,7 +76,7 @@ const moveMembersPlugin = createPlugin({
 						.replace(to.id, toChannelMention)
 					const reply = membersArray
 						.reduce((reply, [id]) => {
-							const mention = userMention(id)
+							const mention = id === interaction.member?.user.id ? 'you' : userMention(id)
 							return reply.replace(id, mention)
 						}, rephrasedReplyFixedChannel)
 
