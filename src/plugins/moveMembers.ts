@@ -52,6 +52,7 @@ const moveMembersPlugin = createPlugin({
 
 					return `${list}, ${mention}`
 				}, '')
+
 				await Promise.all(from.members.map(async (member) => {
 					return member.voice.setChannel(to.id, `Moved by ${interaction.member?.user.username}#${interaction.member?.user.discriminator}.`)
 				}))

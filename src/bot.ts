@@ -41,6 +41,10 @@ const collectIntents = (plugins: PluginConfig[]) => {
 }
 
 const attachPlugins = (client: Client, plugins: PluginConfig[]) => {
+	client.on('error', (err) => {
+		console.error(err)
+	})
+
 	for (const plugin of plugins) {
 		plugin.attach(client)
 	}
