@@ -30,12 +30,13 @@ const moveMembersPlugin = createPlugin({
 				const membersArray = Array.from(from.members)
 				const numMembers = membersArray.length
 
-				const rephrased = await rephrase('There are no members in the channel to move.')
+				const rawRephrased = await rephrase(`There are no members in the ${from.id} channel to move...`)
 				const fromChannelMention = channelMention(from.id)
+				const rephrased = rawRephrased?.replace(from.id, fromChannelMention)
 
 				if (numMembers === 0) {
 					await interaction.reply({
-						content: `${bold('Error:')} ${rephrased?.replace('channel', `channel (${fromChannelMention})`)}..`,
+						content: `${bold('Error:')} ${rephrased}`,
 						ephemeral: true,
 					})
 				}
