@@ -1,6 +1,6 @@
-import type { VoiceChannel } from 'discord.js'
-import { ChannelType, GatewayIntentBits, SlashCommandBuilder } from 'discord.js'
+import { channelMention, bold, ChannelType, GatewayIntentBits, SlashCommandBuilder, userMention } from 'discord.js'
 import createPlugin from '../lib/createPlugin'
+import { rephrase } from '../lib/openai'
 
 const moveMembersPlugin = createPlugin({
 	intents: [
@@ -27,9 +27,41 @@ const moveMembersPlugin = createPlugin({
 				const from = await interaction.options.getChannel('from', true, [ChannelType.GuildVoice]).fetch(true)
 				const to = await interaction.options.getChannel('to', true, [ChannelType.GuildVoice]).fetch(true)
 
+				const membersArray = Array.from(from.members)
+				const numMembers = membersArray.length
+
+				if (numMembers === 0) {
+					await interaction.reply({
+						content: `${bold('Error:')} ${rephrase('There are no members to move in the')} ${channelMention(from.id)} channel...`,
+						options: {
+							ephemeral: true,
+						},
+					})
+				}
+
+				const memberList = membersArray.reduce((list, [id], index) => {
+					const mention = userMention(id)
+
+					if (list.length === 0 && numMembers === 1 || index === 0) {
+						return mention
+					} else if (list.length === index + 1) {
+						return `${list} and ${mention}`
+					}
+
+					return `${list}, ${mention}`
+				}, '')
 				await Promise.all(from.members.map(async (member) => {
 					return member.voice.setChannel(to.id, `Moved by ${interaction.member?.user.username}#${interaction.member?.user.discriminator}.`)
 				}))
+
+				const toChannelMention = channelMention(to.id)
+
+				await interaction.reply({
+					content: `${memberList} ${numMembers > 1 ? 'has' : 'have'} been moved to the ${toChannelMention} channel.`,
+					options: {
+						ephemeral: true,
+					},
+				})
 			},
 		},
 	],

@@ -8,6 +8,9 @@ const config = {
 		clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
 		token: process.env.DISCORD_BOT_TOKEN as string,
 	},
+	openai: {
+		secret: process.env.OPENAI_SECRET as string,
+	},
 }
 
 const ymlPath = path.join(__dirname, '..', 'guild_configs.yml')

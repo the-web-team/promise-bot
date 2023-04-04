@@ -9,6 +9,7 @@
     "discord-api-types": "0.37.37",
     "discord.js": "14.9.0",
     "discordx": "11.7.4",
+    "openai": "^3.2.1",
     "reflect-metadata": "0.1.13",
     "yaml": "2.2.1"
   },
