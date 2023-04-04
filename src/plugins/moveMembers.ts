@@ -72,8 +72,6 @@ const moveMembersPlugin = createPlugin({
 							return reply.replace(id, mention)
 						}, rephrasedReplyFixedChannel)
 
-					console.log('reply', reply)
-
 					await interaction.followUp({
 						content: reply,
 						ephemeral: true,
