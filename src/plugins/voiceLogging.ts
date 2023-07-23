@@ -1,4 +1,4 @@
-import { userMention, GatewayIntentBits } from 'discord.js'
+import { userMention, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import { getGuildConfig } from '../config'
 import createPlugin from '../lib/createPlugin'
 import { goodJokeFromName } from '../lib/openai'
@@ -18,8 +18,13 @@ const voiceLoggerPlugin = createPlugin({
 					const goodJoke = await goodJokeFromName(oldState.member.displayName)
 					const memberMention = userMention(oldState.member.id)
 
+					const embed = new EmbedBuilder()
+						.setColor(0x4c0519)
+						.setDescription(`**${memberMention} left the channel...**\n\n${goodJoke}`)
+						.setTimestamp()
+
 					await oldState.channel.send({
-						content: `${memberMention} left the channel...\n\n${goodJoke}`,
+						embeds: [embed],
 					})
 				}
 
@@ -28,8 +33,13 @@ const voiceLoggerPlugin = createPlugin({
 					const goodJoke = await goodJokeFromName(newState.member.displayName)
 					const memberMention = userMention(newState.member.id)
 
+					const embed = new EmbedBuilder()
+						.setColor(0x022c22)
+						.setDescription(`**${memberMention} joined the channel!**\n\n${goodJoke}`)
+						.setTimestamp()
+
 					await newState.channel.send({
-						content: `${memberMention} joined the channel!\n\n${goodJoke}`,
+						embeds: [embed],
 					})
 				}
 			}

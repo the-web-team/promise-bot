@@ -36,7 +36,9 @@ export const goodJokeFromName = async (name: string) => {
 	return trainedChatCompletion([
 		'You are a comedian.',
 		'You will write really good dad jokes.',
-	], `Write a good dad joke. Involve the name "${name}" if you can.`)
+		'Only say the joke and nothing else.',
+		'Separate the question and the answer by one line.'
+	], `Write a good dad joke. Maybe involve the name "${name}".`)
 }
 
 export default openai
