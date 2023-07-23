@@ -19,7 +19,7 @@ const voiceLoggerPlugin = createPlugin({
 					const memberMention = userMention(oldState.member.id)
 
 					await oldState.channel.send({
-						content: `${memberMention} left the channel...\n${goodJoke}`,
+						content: `${memberMention} left the channel...\n\n${goodJoke}`,
 					})
 				}
 
@@ -29,7 +29,7 @@ const voiceLoggerPlugin = createPlugin({
 					const memberMention = userMention(newState.member.id)
 
 					await newState.channel.send({
-						content: `${memberMention} joined the channel!\n${goodJoke}`,
+						content: `${memberMention} joined the channel!\n\n${goodJoke}`,
 					})
 				}
 			}
