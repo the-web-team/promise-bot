@@ -3,6 +3,7 @@ import createPlugin from '../lib/createPlugin'
 import { rephrase } from '../lib/openai'
 
 const moveMembersPlugin = createPlugin({
+	name: 'Move Members',
 	intents: [
 		GatewayIntentBits.GuildVoiceStates,
 	],

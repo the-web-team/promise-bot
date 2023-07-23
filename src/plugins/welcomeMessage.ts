@@ -13,6 +13,7 @@ import { getGuildConfig } from '../config'
 import { parseMessageVars } from '../utils'
 
 const welcomeMessagePlugin = createPlugin({
+	name: 'Welcome Message',
 	onGuildMemberAdd: async (member) => {
 		const config = await getGuildConfig(member.guild.id)
 		if (config.plugins.welcomeMessage) {

@@ -3,6 +3,7 @@ import createPlugin from '../lib/createPlugin'
 import config from '../config'
 
 const versionPlugin = createPlugin({
+	name: 'Version',
 	slashCommandHandlers: [
 		{
 			data: new SlashCommandBuilder()

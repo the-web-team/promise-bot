@@ -3,6 +3,7 @@ import { getGuildConfig } from '../config'
 import createPlugin from '../lib/createPlugin'
 
 const voiceLoggerPlugin = createPlugin({
+	name: 'Voice Logging',
 	intents: [
 		GatewayIntentBits.GuildVoiceStates,
 	],

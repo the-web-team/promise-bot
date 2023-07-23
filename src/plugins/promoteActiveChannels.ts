@@ -3,6 +3,7 @@ import createPlugin from '../lib/createPlugin'
 import { getGuildConfig } from '../config'
 
 const promoteActiveChannelsPlugin = createPlugin({
+	name: 'Promote Active Channels',
 	onMessage: async (message) => {
 		if (message.guildId) {
 			const config = await getGuildConfig(message.guildId)

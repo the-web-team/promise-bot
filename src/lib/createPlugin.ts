@@ -153,6 +153,7 @@ const createPlugin = (plugin: Plugin) => {
 }
 
 export type Plugin = {
+	name: string
 	intents?: GatewayIntentBits[]
 	onReady?: (client: Client) => Promise<void>
 	onMessage?: (message: Message) => Promise<void>

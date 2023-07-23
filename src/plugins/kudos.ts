@@ -59,6 +59,7 @@ const updateUsersKudos = async (guildId: string, operations: KarmaOperations) =>
 }
 
 const kudosPlugin = createPlugin({
+	name: 'Kudos',
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,

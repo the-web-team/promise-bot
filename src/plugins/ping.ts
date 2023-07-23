@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from 'discord.js'
 import createPlugin from '../lib/createPlugin'
 
 const pingPlugin = createPlugin({
+	name: 'Ping',
 	slashCommandHandlers: [
 		{
 			data: new SlashCommandBuilder()
