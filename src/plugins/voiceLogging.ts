@@ -12,22 +12,9 @@ const voiceLoggerPlugin = createPlugin({
 		const config = await getGuildConfig(oldState.guild.id)
 
 		if (config.plugins?.voiceLogging?.enabled) {
-			console.log('oldState.channelId', oldState.channelId)
-			console.log('newState.channelId', newState.channelId)
-			console.log('oldState.member.displayName', oldState.member?.displayName)
-			console.log('oldState.member.id', oldState.member?.id)
-			console.log('oldState.channel.id', oldState.channel?.id)
-			console.log('newState.member.displayName', newState.member?.displayName)
-			console.log('newState.member.id', newState.member?.id)
-			console.log('newState.channel.id', newState.channel?.id)
-
-			// User leaves a channel
 			if (oldState.channelId !== newState.channelId) {
-				console.log('changed')
-
+				// User leaves a channel
 				if (oldState.channelId && oldState.member && oldState.channel && oldState.channel.isVoiceBased()) {
-					console.log('left')
-
 					const goodJoke = await goodJokeFromName(oldState.member.displayName)
 					const memberMention = userMention(oldState.member.id)
 
@@ -36,9 +23,8 @@ const voiceLoggerPlugin = createPlugin({
 					})
 				}
 
+				// User joins a channel
 				if (newState.channelId && newState.channel && newState.channel.isVoiceBased() && newState.member) {
-					console.log('joined')
-
 					const goodJoke = await goodJokeFromName(newState.member.displayName)
 					const memberMention = userMention(newState.member.id)
 
