@@ -53,51 +53,51 @@ const createPlugin = (plugin: Plugin) => {
 				client.on('channelUpdate', plugin.onChannelUpdate)
 			}
 
-			if ( plugin.onEmojiCreate) {
+			if (plugin.onEmojiCreate) {
 				client.on('emojiCreate', plugin.onEmojiCreate)
 			}
 
-			if ( plugin.onEmojiDelete) {
+			if (plugin.onEmojiDelete) {
 				client.on('emojiDelete', plugin.onEmojiDelete)
 			}
 
-			if ( plugin.onEmojiUpdate) {
+			if (plugin.onEmojiUpdate) {
 				client.on('emojiUpdate', plugin.onEmojiUpdate)
 			}
 
-			if ( plugin.onGuildBanAdd) {
+			if (plugin.onGuildBanAdd) {
 				client.on('guildBanAdd', plugin.onGuildBanAdd)
 			}
 
-			if ( plugin.onGuildBanRemove) {
+			if (plugin.onGuildBanRemove) {
 				client.on('guildBanRemove', plugin.onGuildBanRemove)
 			}
 
-			if ( plugin.onGuildMemberRemove) {
+			if (plugin.onGuildMemberRemove) {
 				client.on('guildMemberRemove', plugin.onGuildMemberRemove)
 			}
 
-			if ( plugin.onGuildMemberUpdate) {
+			if (plugin.onGuildMemberUpdate) {
 				client.on('guildMemberUpdate', plugin.onGuildMemberUpdate)
 			}
 
-			if ( plugin.onGuildMemberAdd) {
+			if (plugin.onGuildMemberAdd) {
 				client.on('guildMemberAdd', plugin.onGuildMemberAdd)
 			}
 
-			if ( plugin.onRoleCreate) {
+			if (plugin.onRoleCreate) {
 				client.on('roleCreate', plugin.onRoleCreate)
 			}
 
-			if ( plugin.onRoleDelete) {
+			if (plugin.onRoleDelete) {
 				client.on('roleDelete', plugin.onRoleDelete)
 			}
 
-			if ( plugin.onRoleUpdate) {
+			if (plugin.onRoleUpdate) {
 				client.on('roleUpdate', plugin.onRoleUpdate)
 			}
 
-			if ( plugin.onVoiceStateUpdate) {
+			if (plugin.onVoiceStateUpdate) {
 				client.on('voiceStateUpdate', plugin.onVoiceStateUpdate)
 			}
 
