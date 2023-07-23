@@ -1,8 +1,11 @@
-import { userMention } from 'discord.js'
+import { userMention, GatewayIntentBits } from 'discord.js'
 import { getGuildConfig } from '../config'
 import createPlugin from '../lib/createPlugin'
 
 const voiceLoggerPlugin = createPlugin({
+	intents: [
+		GatewayIntentBits.GuildVoiceStates,
+	],
 	onVoiceStateUpdate: async (oldState, newState) => {
 		const config = await getGuildConfig(oldState.guild.id)
 
