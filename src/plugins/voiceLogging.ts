@@ -2,7 +2,7 @@ import { userMention } from 'discord.js'
 import { getGuildConfig } from '../config'
 import createPlugin from '../lib/createPlugin'
 
-export const voiceLoggerPlugin = createPlugin({
+const voiceLoggerPlugin = createPlugin({
 	onVoiceStateUpdate: async (oldState, newState) => {
 		const config = await getGuildConfig(oldState.guild.id)
 
@@ -24,3 +24,5 @@ export const voiceLoggerPlugin = createPlugin({
 		}
 	},
 })
+
+export default voiceLoggerPlugin
