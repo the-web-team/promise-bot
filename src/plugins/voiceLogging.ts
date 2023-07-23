@@ -22,7 +22,7 @@ const voiceLoggerPlugin = createPlugin({
 			console.log('newState.channel.id', newState.channel?.id)
 
 			// User leaves a channel
-			if (oldState.channelId === newState.channelId) {
+			if (oldState.channelId !== newState.channelId) {
 				console.log('changed')
 
 				if (oldState.channelId && oldState.member && oldState.channel && oldState.channel.isVoiceBased()) {
@@ -32,7 +32,7 @@ const voiceLoggerPlugin = createPlugin({
 					const memberMention = userMention(oldState.member.id)
 
 					await oldState.channel.send({
-						content: `${memberMention} left the channel... ${goodJoke}`,
+						content: `${memberMention} left the channel...\n${goodJoke}`,
 					})
 				}
 
@@ -43,7 +43,7 @@ const voiceLoggerPlugin = createPlugin({
 					const memberMention = userMention(newState.member.id)
 
 					await newState.channel.send({
-						content: `${memberMention} joined the channel! ${goodJoke}`,
+						content: `${memberMention} joined the channel!\n${goodJoke}`,
 					})
 				}
 			}
