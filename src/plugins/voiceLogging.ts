@@ -1,6 +1,7 @@
 import { userMention, GatewayIntentBits } from 'discord.js'
 import { getGuildConfig } from '../config'
 import createPlugin from '../lib/createPlugin'
+import { goodJokeFromName } from '../lib/openai'
 
 const voiceLoggerPlugin = createPlugin({
 	name: 'Voice Logging',
@@ -14,14 +15,18 @@ const voiceLoggerPlugin = createPlugin({
 			// User leaves a channel
 			if (oldState.channelId === newState.channelId) {
 				if (oldState.channelId && oldState.member && oldState.channel) {
+					const goodJoke = await goodJokeFromName(oldState.member.displayName)
+
 					await oldState.channel.send({
-						content: `${userMention(oldState.member.id)} left the channel.`,
+						content: `${userMention(oldState.member.id)} left the channel... ${goodJoke}`,
 					})
 				}
 
 				if (newState.channelId && newState.channel && newState.member) {
+					const goodJoke = await goodJokeFromName(newState.member.displayName)
+
 					await newState.channel.send({
-						content: `${userMention(newState.member.id)} joined the channel.`,
+						content: `${userMention(newState.member.id)} joined the channel! ${goodJoke}`,
 					})
 				}
 			}

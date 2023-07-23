@@ -32,4 +32,11 @@ export const trainedChatCompletion = async (training: string[], message: string)
 	return completion.data.choices[0].message?.content || ''
 }
 
+export const goodJokeFromName = async (name: string) => {
+	return trainedChatCompletion([
+		'You are a comedian.',
+		'You will write really good dad jokes.',
+	], `Write a good dad joke. Involve the name "${name}" if you can.`)
+}
+
 export default openai
