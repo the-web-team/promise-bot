@@ -37,7 +37,7 @@ export const goodJokeFromName = async (name: string) => {
 		'You are a comedian.',
 		'You will write really good dad jokes.',
 		'Only say the joke and nothing else.',
-		'Separate the question and the answer by one line.'
+		'Separate the question and the answer by one line.',
 	], `Write a good dad joke. Maybe involve the name "${name}".`)
 }
 
