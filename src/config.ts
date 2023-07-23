@@ -19,7 +19,7 @@ const ymlPath = path.join(__dirname, '..', 'guild_configs.yml')
 export const getGuildConfig = async (guildId: string) => {
 	const guildConfigYaml = await fs.readFile(ymlPath, { encoding: 'utf-8' })
 	const configs = parse(guildConfigYaml)
-	return configs[`${guildId}`]
+	return configs[`${guildId}`] as GuildConfig
 }
 
 export default config

@@ -8,6 +8,9 @@ import type {
 declare global {
 	type GuildConfig = {
 		plugins: {
+			voiceLogging?: {
+				enabled: boolean
+			}
 			welcomeMessage?: {
 				channel: string
 				message: string

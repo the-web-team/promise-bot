@@ -3,7 +3,7 @@ import {
 	channelMention,
 } from 'discord.js'
 
-const parseChannelVar = (message: string, currentChannelId?: string) => {
+export const parseChannelVar = (message: string, currentChannelId?: string) => {
 	const channelMentionRegex = /\{channel:(.*)}/g
 	const currentChannelRegex = /^\{channel}$/g
 
@@ -19,7 +19,7 @@ const parseChannelVar = (message: string, currentChannelId?: string) => {
 		})
 }
 
-const parseMemberVar = (message: string, currentMemberId?: string) => {
+export const parseMemberVar = (message: string, currentMemberId?: string) => {
 	const memberMentionRegex = /\{member:(.*)}/g
 	const currentMemberRegex = /\{member}/g
 

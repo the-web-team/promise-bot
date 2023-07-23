@@ -7,6 +7,14 @@ import type {
 	GatewayIntentBits,
 	SlashCommandBuilder,
 	GuildMember,
+	NonThreadGuildBasedChannel,
+	DMChannel,
+	GuildEmoji,
+	GuildBan,
+	PartialGuildMember,
+	PartialMessage,
+	Role,
+	VoiceState,
 } from 'discord.js'
 
 const createPlugin = (plugin: Plugin) => {
@@ -23,6 +31,74 @@ const createPlugin = (plugin: Plugin) => {
 
 			if (plugin.onMessage) {
 				client.on('messageCreate', plugin.onMessage)
+			}
+
+			if (plugin.onMessageDelete) {
+				client.on('messageDelete', plugin.onMessageDelete)
+			}
+
+			if (plugin.onMessageUpdate) {
+				client.on('messageUpdate', plugin.onMessageUpdate)
+			}
+
+			if (plugin.onChannelCreate) {
+				client.on('channelCreate', plugin.onChannelCreate)
+			}
+
+			if (plugin.onChannelDelete) {
+				client.on('channelDelete', plugin.onChannelDelete)
+			}
+
+			if (plugin.onChannelUpdate) {
+				client.on('channelUpdate', plugin.onChannelUpdate)
+			}
+
+			if ( plugin.onEmojiCreate) {
+				client.on('emojiCreate', plugin.onEmojiCreate)
+			}
+
+			if ( plugin.onEmojiDelete) {
+				client.on('emojiDelete', plugin.onEmojiDelete)
+			}
+
+			if ( plugin.onEmojiUpdate) {
+				client.on('emojiUpdate', plugin.onEmojiUpdate)
+			}
+
+			if ( plugin.onGuildBanAdd) {
+				client.on('guildBanAdd', plugin.onGuildBanAdd)
+			}
+
+			if ( plugin.onGuildBanRemove) {
+				client.on('guildBanRemove', plugin.onGuildBanRemove)
+			}
+
+			if ( plugin.onGuildMemberRemove) {
+				client.on('guildMemberRemove', plugin.onGuildMemberRemove)
+			}
+
+			if ( plugin.onGuildMemberUpdate) {
+				client.on('guildMemberUpdate', plugin.onGuildMemberUpdate)
+			}
+
+			if ( plugin.onGuildMemberAdd) {
+				client.on('guildMemberAdd', plugin.onGuildMemberAdd)
+			}
+
+			if ( plugin.onRoleCreate) {
+				client.on('roleCreate', plugin.onRoleCreate)
+			}
+
+			if ( plugin.onRoleDelete) {
+				client.on('roleDelete', plugin.onRoleDelete)
+			}
+
+			if ( plugin.onRoleUpdate) {
+				client.on('roleUpdate', plugin.onRoleUpdate)
+			}
+
+			if ( plugin.onVoiceStateUpdate) {
+				client.on('voiceStateUpdate', plugin.onVoiceStateUpdate)
 			}
 
 			if (
@@ -80,7 +156,23 @@ export type Plugin = {
 	intents?: GatewayIntentBits[]
 	onReady?: (client: Client) => Promise<void>
 	onMessage?: (message: Message) => Promise<void>
+	onMessageDelete?: (message: Message | PartialMessage) => Promise<void>
+	onMessageUpdate?: (oldMessage: Message | PartialMessage, newMessage: Message | PartialMessage) => Promise<void>
+	onChannelCreate?: (channel: NonThreadGuildBasedChannel) => Promise<void>
+	onChannelDelete?: (channel: DMChannel | NonThreadGuildBasedChannel) => Promise<void>
+	onChannelUpdate?: (oldChannel: DMChannel | NonThreadGuildBasedChannel, newChannel: DMChannel | NonThreadGuildBasedChannel) => Promise<void>
+	onEmojiCreate?: (emoji: GuildEmoji) => Promise<void>
+	onEmojiDelete?: (emoji: GuildEmoji) => Promise<void>
+	onEmojiUpdate?: (oldEmoji: GuildEmoji, newEmoji: GuildEmoji) => Promise<void>
+	onGuildBanAdd?: (ban: GuildBan) => Promise<void>
+	onGuildBanRemove?: (ban: GuildBan) => Promise<void>
+	onGuildMemberRemove?: (member: GuildMember | PartialGuildMember) => Promise<void>
+	onGuildMemberUpdate?: (oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) => Promise<void>
 	onGuildMemberAdd?: (member: GuildMember) => Promise<void>
+	onRoleCreate?: (role: Role) => Promise<void>
+	onRoleDelete?: (role: Role) => Promise<void>
+	onRoleUpdate?: (oldRole: Role, newRole: Role) => Promise<void>
+	onVoiceStateUpdate?: (oldState: VoiceState, newState: VoiceState) => Promise<void>
 	modalSubmitHandlers?: Record<string, (interaction: ModalSubmitInteraction) => Promise<void>>
 	slashCommandHandlers?: {
 		data: SlashCommandBuilder | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>
