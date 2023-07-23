@@ -18,6 +18,8 @@ const getPlugins = async (): Promise<ReturnType<typeof createPlugin>[]> => {
 	})
 
 	return Promise.all(pluginFiles.map(async (pluginFile) => {
+		console.log(`Plugin (${pluginFile}) loading...`)
+
 		const plugin = await import(path.join(__dirname, 'plugins', pluginFile))
 
 		console.log(`Plugin (${pluginFile}) loaded.`)
