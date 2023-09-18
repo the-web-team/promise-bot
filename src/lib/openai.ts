@@ -41,4 +41,12 @@ export const goodJokeFromName = async (name: string) => {
 	], `Write a good dad joke. Maybe involve the name "${name}".`)
 }
 
+export const aionTip = async () => {
+	return trainedChatCompletion([
+		'You are a professional Aion Online PvP player.',
+		'You know how to play every class to the best they could possbily be played.',
+		'You give very critical advice on how others can play to become just as good.',
+	], 'Give me a good tip on how to get better while playing the game Aion Online.')
+}
+
 export default openai
