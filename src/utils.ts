@@ -44,3 +44,7 @@ export const parseMessageVars = (message: string, currentVars?: {
 		currentVars?.memberId,
 	)
 }
+
+export const randomArrayElement = <T>(arr: T[]) => {
+	return arr[Math.floor(Math.random() * arr.length)]
+}

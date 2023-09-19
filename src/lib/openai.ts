@@ -1,6 +1,7 @@
 import type { ChatCompletionMessageParam } from 'openai/resources/chat'
 import OpenAI from 'openai'
 import config from '../config'
+import { randomArrayElement } from '../utils'
 
 const openai = new OpenAI({
 	apiKey: config.openai.secret,
@@ -45,12 +46,30 @@ export const goodJokeFromName = async (name: string) => {
 }
 
 export const aionTip = async () => {
+	const topic = randomArrayElement([
+		'Templar',
+		'Gladiator',
+		'Assassin',
+		'Ranger',
+		'Cleric',
+		'Chanter',
+		'Sorcerer',
+		'Spiritmaster',
+		'General',
+		'Deity Transformations',
+	])
+
+	const topic2 = randomArrayElement([
+		'PvP',
+		'PvE',
+	])
+
 	return trainedChatCompletion([
 		'You are a professional Aion Online PvP player.',
-		'You know how to play every class to the best they could possbily be played.',
+		'You know how to play every class to the best they could possibly be played.',
 		'You give very critical advice on how others can play to become just as good.',
 		'You only reply with 1 to 3 sentences.',
-	], 'Give me a good tip on how to get better while playing the game Aion Online.')
+	], `Give me a good ${topic} tip about on how to get better at ${topic2} in the game Aion Online.`)
 }
 
 export default openai
