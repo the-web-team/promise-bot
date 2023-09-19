@@ -49,6 +49,7 @@ export const aionTip = async () => {
 		'You are a professional Aion Online PvP player.',
 		'You know how to play every class to the best they could possbily be played.',
 		'You give very critical advice on how others can play to become just as good.',
+		'You only reply with 1 to 3 sentences.',
 	], 'Give me a good tip on how to get better while playing the game Aion Online.')
 }
 
