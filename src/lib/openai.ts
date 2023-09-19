@@ -1,12 +1,10 @@
-import type { ChatCompletionRequestMessage } from 'openai'
-import { ChatCompletionRequestMessageRoleEnum, Configuration, OpenAIApi } from 'openai'
+import type { ChatCompletionMessageParam } from 'openai/resources/chat'
+import OpenAI from 'openai'
 import config from '../config'
 
-const configuration = new Configuration({
+const openai = new OpenAI({
 	apiKey: config.openai.secret,
 })
-
-const openai = new OpenAIApi(configuration)
 
 export const rephrase = async (phrase: string) => {
 	return trainedChatCompletion([
@@ -16,20 +14,25 @@ export const rephrase = async (phrase: string) => {
 }
 
 export const trainedChatCompletion = async (training: string[], message: string) => {
-	const completion = await openai.createChatCompletion({
-		model: 'gpt-3.5-turbo',
-		messages: training.map<ChatCompletionRequestMessage>((train) => {
-			return {
-				role: ChatCompletionRequestMessageRoleEnum.System,
-				content: train,
-			}
-		}).concat({
-			role: ChatCompletionRequestMessageRoleEnum.User,
-			content: message,
-		}),
+	const trainingMessages: ChatCompletionMessageParam[] = training.map((train) => {
+		return {
+			role: 'system',
+			content: train,
+		}
 	})
 
-	return completion.data.choices[0].message?.content || ''
+	const completion = await openai.chat.completions.create({
+		model: 'gpt-4',
+		messages: [
+			...trainingMessages,
+			{
+				role: 'user',
+				content: message,
+			},
+		],
+	})
+
+	return completion.choices[0].message?.content || ''
 }
 
 export const goodJokeFromName = async (name: string) => {
